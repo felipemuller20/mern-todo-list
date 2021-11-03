@@ -19,9 +19,50 @@ const getAllStatus = async () => {
 const create = async (newTask) => {
   const { task, status } = newTask;
 
-  const isValid = middlewares.validateCreateEntries(task, status);
+  const isValid = middlewares.validateEntries(task, status);
   if (isValid) return isValid;
 
   const createdTask = await TasksModels.create(newTask);
   return createdTask.ops[0];
+}
+
+const exclude = async (id) => {
+  const isValid = middlewares.validateId(id);
+  if (isValid) return isValid;
+
+  const task = await TasksModels.exclude(id);
+  if (!task) {
+    return {
+      code: 404,
+      message: "There is no match with this ID",
+    };
+  }
+
+  return task;
+}
+
+const update = async (id, task, status) => {
+  const isValid = middlewares.validateId(id);
+  if (isValid) return isValid;
+
+  const entries = middlewares.validateEntries(task, status);
+  if (entries) return entries;
+
+  const updatedTask = await TasksModels.update(id, task, status);
+  if (!updatedTask) {
+    return {
+      code: 404,
+      message: "There is no match with this ID",
+    };
+  };
+  return updatedTask;
+}
+
+module.exports = {
+  getAll,
+  getAllAlphabetic,
+  getAllStatus,
+  exclude,
+  create,
+  update,
 }
