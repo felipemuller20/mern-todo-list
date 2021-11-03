@@ -32,8 +32,8 @@ const getById = async (id) => {
   return task;
 }
 
-const create = async (todo) => {
-  const { date, status, task } = todo;
+const create = async (toDo) => {
+  const { date, status, task } = toDo;
   const db = await connection();
   const task = await db.collection('tasks')
     .insertOne({ date, status, task });
