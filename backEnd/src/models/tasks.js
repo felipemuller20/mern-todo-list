@@ -1,0 +1,65 @@
+const { ObjectId } = require('mongodb');
+const connection = require('./connection');
+
+const getAll = async () => {
+  const db = await connection();
+  const tasks = await db.collection('tasks').find().sort({ date: -1 }).toArray();
+  return tasks;
+};
+
+const getAllAlphabetic = async () => {
+  const db = await connection();
+  const tasks = await db.collection('tasks')
+    .find()
+    .sort({ task: 1 })
+    .toArray();
+  return tasks;
+};
+
+const getAllStatus = async () => {
+  const db = await connection();
+  const tasks = await db.collection('tasks')
+    .find()
+    .sort({ status: 1 })
+    .toArray();
+  return tasks;
+};
+
+const getById = async (id) => {
+  const db = await connection();
+  const task = await db.collection('tasks')
+    .findOne(new ObjectId(id));
+  return task;
+}
+
+const create = async (todo) => {
+  const { date, status, task } = todo;
+  const db = await connection();
+  const task = await db.collection('tasks')
+    .insertOne({ date, status, task });
+  return task;
+}
+
+const exclude = async (id) => {
+  const db = await connection();
+  const task = await getById(id);
+  await db.collection('tasks').deleteOne({ _id: ObjectId(id) });
+  return task;
+}
+
+const update = async (id, task, status) => {
+  const db = await connection();
+  const updatedTask = await db.collection('tasks')
+    .updateOne({ _id: ObjectId(id) }, { $set: { task, status }});
+  return updatedTask;
+}
+
+module.exports = {
+  getAll,
+  getAllAlphabetic,
+  getAllStatus,
+  getById,
+  exclude,
+  create,
+  update,
+}
