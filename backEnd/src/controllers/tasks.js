@@ -38,10 +38,26 @@ const create = rescue(async (req, res) => {
     date: getCurrentDate(),
   };
 
-  const task = await TasksServices.create(newTask);
-  if (task.message) return res.status(task.code).json({ message: task.message });
+  const createdTask = await TasksServices.create(newTask);
+  if (createdTask.message) return res.status(createdTask.code).json({ message: createdTask.message });
 
+  res.status(200).json(createdTask);
+})
+
+const exclude = rescue(async (req, res) => {
+  const { id } = req.params;
+  const task = await TasksServices.exclude(id);
+  if (task.message) return res.status(task.code).json({ message: task.message });
   res.status(200).json(task);
+})
+
+const update = rescue(async (req, res) => {
+  const { id } = req.params;
+  const { task, status } = req.body;
+
+  const updatedTask = await TasksServices.update(id, task, status);
+  if (updatedTask.message) return res.status(updatedTask.code).json({ message: updatedTask.message });
+  res.status(200).json(updatedTask);
 })
 
 module.exports = {
@@ -49,4 +65,6 @@ module.exports = {
   getAllAlphabetic,
   getAllStatus,
   create,
+  exclude,
+  update,
 };
