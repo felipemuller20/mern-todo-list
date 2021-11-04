@@ -3,7 +3,7 @@ const connection = require('./connection');
 
 const getAll = async () => {
   const db = await connection();
-  const tasks = await db.collection('tasks').find().sort({ date: -1 }).toArray();
+  const tasks = await db.collection('tasks').find().sort({ date: 1 }).toArray();
   return tasks;
 };
 
@@ -27,17 +27,19 @@ const getAllStatus = async () => {
 
 const getById = async (id) => {
   const db = await connection();
-  const task = await db.collection('tasks')
+  const searchedTask = await db.collection('tasks')
     .findOne(new ObjectId(id));
-  return task;
+  return searchedTask;
 }
 
 const create = async (toDo) => {
   const { date, status, task } = toDo;
   const db = await connection();
-  const task = await db.collection('tasks')
+  const createdTask = await db
+    .collection('tasks')
     .insertOne({ date, status, task });
-  return task;
+  console.log(createdTask)
+  return createdTask;
 }
 
 const exclude = async (id) => {
@@ -52,8 +54,8 @@ const update = async (id, task, status) => {
   await db.collection('tasks')
     .updateOne({ _id: ObjectId(id) }, { $set: { task, status }});
 
-  const task = await getById(id);
-  return task;
+  const updatedTask = await getById(id);
+  return updatedTask;
 }
 
 module.exports = {

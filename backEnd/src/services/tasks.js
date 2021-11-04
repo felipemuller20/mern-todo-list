@@ -23,7 +23,9 @@ const create = async (newTask) => {
   if (isValid) return isValid;
 
   const createdTask = await TasksModels.create(newTask);
-  return createdTask.ops[0];
+  const taskFromId = await TasksModels.getById(createdTask.insertedId)
+  console.log(taskFromId);
+  return taskFromId;
 }
 
 const exclude = async (id) => {
