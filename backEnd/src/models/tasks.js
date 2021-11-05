@@ -3,7 +3,7 @@ const connection = require('./connection');
 
 const getAll = async () => {
   const db = await connection();
-  const tasks = await db.collection('tasks').find().sort({ date: 1 }).toArray();
+  const tasks = await db.collection('tasks').find().toArray();
   return tasks;
 };
 
