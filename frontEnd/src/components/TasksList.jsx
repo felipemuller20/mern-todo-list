@@ -2,6 +2,7 @@
 import React, { useContext } from 'react';
 import TaskContext from '../context/TaskContext';
 import DeleteTask from './DeleteTask';
+import UpdateTask from './UpdateTask';
 
 function TaskList() {
   const { tasks } = useContext(TaskContext);
@@ -18,6 +19,7 @@ function TaskList() {
           {'  '}
           <div>
             <DeleteTask task={task} />
+            <UpdateTask task={task} />
           </div>
         </div>
       ))}
