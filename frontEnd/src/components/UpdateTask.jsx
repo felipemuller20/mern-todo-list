@@ -37,26 +37,36 @@ function UpdateTask({ task }) {
 
   return (
     <>
-      <button type="button" onClick={onClick}>
+      <button
+        type="button"
+        onClick={onClick}
+        className="button-settings"
+        id="update"
+      >
         Editar
       </button>
       {editing ? (
         <div>
-          <input
+          <textarea
+            className="edit-input"
             type="text"
             placeholder="Digite a tarefa editada"
             value={editedTask.task}
             onChange={handleChange}
           />
-          <select value={editedTask.status} onChange={handleSelect}>
+          <select
+            value={editedTask.status}
+            onChange={handleSelect}
+            className="edit-select"
+          >
             <option value="Pendente">Pendente</option>
             <option value="Em andamento">Em andamento</option>
             <option value="Pronto">Pronto</option>
           </select>
-          <button type="button" onClick={saveBtn}>
+          <button type="button" onClick={saveBtn} id="save-edit">
             Salvar
           </button>
-          <button type="button" onClick={cancelBtn}>
+          <button type="button" onClick={cancelBtn} id="cancel-edit">
             Cancelar
           </button>
         </div>

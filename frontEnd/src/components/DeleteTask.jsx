@@ -14,7 +14,12 @@ function DeleteTask({ task }) {
   };
 
   return (
-    <button type="button" onClick={onClick}>
+    <button
+      type="button"
+      onClick={onClick}
+      className="button-settings"
+      id="delete"
+    >
       Deletar
     </button>
   );

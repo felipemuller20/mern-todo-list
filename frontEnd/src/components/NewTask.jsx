@@ -25,17 +25,24 @@ function NewTask() {
   };
 
   return (
-    <>
-      <input
+    <div className="new-task-container">
+      <textarea
+        maxLength="180"
+        className="insert-task"
         type="text"
         placeholder="Adicione uma nova tarefa"
         value={newTask.task}
         onChange={handleChange}
       />
-      <button type="button" onClick={onClick} disabled={isDisabled()}>
+      <button
+        className="new-task-btn"
+        type="button"
+        onClick={onClick}
+        disabled={isDisabled()}
+      >
         Adicionar Tarefa
       </button>
-    </>
+    </div>
   );
 }
 

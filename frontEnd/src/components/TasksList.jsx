@@ -7,17 +7,28 @@ import UpdateTask from './UpdateTask';
 function TaskList() {
   const { tasks } = useContext(TaskContext);
 
+  const getStatus = (value) => {
+    switch (value) {
+      case 'Pendente':
+        return 'status-pending';
+      case 'Em andamento':
+        return 'status-ongoing';
+      default:
+        return 'status-done';
+    }
+  };
+
   return (
-    <div>
+    <div className="task-container">
       {tasks.map((task, index) => (
-        <div key={index}>
-          <span>{task.task}</span>
-          {' - '}
-          <span>{task.status}</span>
-          {' - '}
-          <span>{task.date}</span>
+        <div key={index} className="single-task">
+          <span id="task">{task.task}</span>
+          <span id="status" className={getStatus(task.status)}>
+            {task.status}
+          </span>
+          <span id="date">{task.date}</span>
           {'  '}
-          <div>
+          <div className="btn-container">
             <DeleteTask task={task} />
             <UpdateTask task={task} />
           </div>
