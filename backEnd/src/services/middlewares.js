@@ -20,13 +20,13 @@ const validateId = (id) => {
   if (!ObjectId.isValid(id)) {
     return {
       code: 400,
-      message: "Inserted ID is invalid",
+      message: 'Inserted ID is invalid',
     };
-  };
+  }
   return false;
-}
+};
 
-module.exports = { 
+module.exports = {
   validateEntries,
   validateId,
 };

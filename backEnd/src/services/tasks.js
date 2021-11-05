@@ -14,7 +14,7 @@ const getAllAlphabetic = async () => {
 const getAllStatus = async () => {
   const tasks = await TasksModels.getAllStatus();
   return tasks;
-}
+};
 
 const create = async (newTask) => {
   const { task, status } = newTask;
@@ -23,10 +23,9 @@ const create = async (newTask) => {
   if (isValid) return isValid;
 
   const createdTask = await TasksModels.create(newTask);
-  const taskFromId = await TasksModels.getById(createdTask.insertedId)
-  console.log(taskFromId);
+  const taskFromId = await TasksModels.getById(createdTask.insertedId);
   return taskFromId;
-}
+};
 
 const exclude = async (id) => {
   const isValid = middlewares.validateId(id);
@@ -36,12 +35,12 @@ const exclude = async (id) => {
   if (!task) {
     return {
       code: 404,
-      message: "There is no match with this ID",
+      message: 'There is no match with this ID',
     };
   }
 
   return task;
-}
+};
 
 const update = async (id, task, status) => {
   const isValid = middlewares.validateId(id);
@@ -54,11 +53,11 @@ const update = async (id, task, status) => {
   if (!updatedTask) {
     return {
       code: 404,
-      message: "There is no match with this ID",
+      message: 'There is no match with this ID',
     };
-  };
+  }
   return updatedTask;
-}
+};
 
 module.exports = {
   getAll,
@@ -67,4 +66,4 @@ module.exports = {
   exclude,
   create,
   update,
-}
+};

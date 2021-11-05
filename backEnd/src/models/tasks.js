@@ -30,7 +30,7 @@ const getById = async (id) => {
   const searchedTask = await db.collection('tasks')
     .findOne(new ObjectId(id));
   return searchedTask;
-}
+};
 
 const create = async (toDo) => {
   const { date, status, task } = toDo;
@@ -38,25 +38,24 @@ const create = async (toDo) => {
   const createdTask = await db
     .collection('tasks')
     .insertOne({ date, status, task });
-  console.log(createdTask)
   return createdTask;
-}
+};
 
 const exclude = async (id) => {
   const db = await connection();
   const task = await getById(id);
   await db.collection('tasks').deleteOne({ _id: ObjectId(id) });
   return task;
-}
+};
 
 const update = async (id, task, status) => {
   const db = await connection();
   await db.collection('tasks')
-    .updateOne({ _id: ObjectId(id) }, { $set: { task, status }});
+    .updateOne({ _id: ObjectId(id) }, { $set: { task, status } });
 
   const updatedTask = await getById(id);
   return updatedTask;
-}
+};
 
 module.exports = {
   getAll,
@@ -66,4 +65,4 @@ module.exports = {
   exclude,
   create,
   update,
-}
+};
