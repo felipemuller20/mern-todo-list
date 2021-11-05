@@ -42,7 +42,8 @@ Para executar o projeto no seu computador:
 - Vá para o diretório backEnd `cd backEnd`;
 - Instale as dependências com o comando `npm install`;
 - Execute o servidor, com o comando `npm start`;
-- Agora, com o servidor sendo executado, vá para o diretório frontEnd `cd ../frontEnd`;
+- Agora, com o servidor sendo executado, execute um novo terminal e certifique-se de que está na raíz do projeto.
+- Já na raíz do projeto, entre no diretório frontEnd `cd frontEnd`;
 - Instale as dependências com o comando `npm install`;
 - Execute o progama com o comando `npm start`;
 
