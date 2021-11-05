@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
-import OrderButtons from './components/OrderButtons';
+import OrderSelect from './components/OrderSelect';
 import TaskList from './components/TasksList';
 
 function App() {
   return (
     <>
-      <OrderButtons />
+      <OrderSelect />
       <TaskList />
     </>
   );
