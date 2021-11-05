@@ -1,20 +1,14 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import './App.css';
-import TaskContext from './context/TaskContext';
+import OrderButtons from './components/OrderButtons';
+import TaskList from './components/TasksList';
 
 function App() {
-  const { tasksByDate, setOrderButton } = useContext(TaskContext);
-
-  const click = () => {
-    setOrderButton('teste');
-    console.log(tasksByDate);
-  };
   return (
-    <div>
-      <button type="button" onClick={click}>
-        Teste
-      </button>
-    </div>
+    <>
+      <OrderButtons />
+      <TaskList />
+    </>
   );
 }
 

@@ -1,32 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import TaskContext from './TaskContext';
-import getByDate from '../services/tasks';
+import fetchTasks from '../services/tasks';
 
 function TaskProvider({ children }) {
+  const [tasks, setTasks] = useState([]);
   const [orderButton, setOrderButton] = useState('date');
-  const [tasksByDate, setTasksByDate] = useState([]);
-  const [tasksByName, setTasksByName] = useState([]);
-  const [tasksByStatus, setTasksByStatus] = useState([]);
 
-  const fetchByDate = async () => {
-    const apiResult = await getByDate();
-    setTasksByDate(apiResult);
+  const getTasks = async (order) => {
+    const apiResult = await fetchTasks(order);
+    setTasks(apiResult);
   };
 
   useEffect(() => {
-    fetchByDate();
+    getTasks(orderButton);
   }, [orderButton]);
 
   return (
     <TaskContext.Provider
       value={{
-        tasksByDate,
-        tasksByName,
-        tasksByStatus,
-        setTasksByDate,
-        setTasksByName,
-        setTasksByStatus,
+        tasks,
+        setTasks,
         orderButton,
         setOrderButton,
       }}
